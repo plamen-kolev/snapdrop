@@ -1,6 +1,7 @@
 version: "3"
 services:
   node:
+    restart: unless-stopped
     image: "node:lts-alpine"
     user: "node"
     working_dir: /home/node/app
@@ -8,6 +9,7 @@ services:
       - ./server/:/home/node/app
     command: ash -c "npm i && node index.js"
   nginx:
+    restart: unless-stopped
     build:
       context: ./docker/
       dockerfile: nginx-with-openssl.Dockerfile
